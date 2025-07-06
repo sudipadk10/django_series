@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post">
+<form method="post">
     {% csrf_token %}
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-    <button type="submit">Submit</button>   
-</form>
+    
+    <div>
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        <p style="color: red;">{{ form.name.errors }}</p>
+    </div>
 
-</body>
-</html>
+
+    <div>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        <p style="color: red;">{{ form.email.errors }}</p>
+    </div>
+
+    <div>
+        {{ form.age.label_tag }}
+        {{ form.age }}
+        <p style="color: red;">{{ form.age.errors }}</p>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>

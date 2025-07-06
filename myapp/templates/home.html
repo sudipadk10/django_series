@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
+
 
 Home page
     
 {% endblock title %}
 
 {% block body %}
+<img src="{% static 'images/pi.png' %}" alt="logo" height="300px">
     <h1>This is home page</h1>
 <a href="{% url 'about' %}">About</a>
 <ul>
@@ -13,5 +16,23 @@ Home page
         <li>{{ item }}</li>
     {% endfor %}
 </ul>
+
+<p>{{ name | upper }}</p>  <!-- Converts text to uppercase -->
+
+<br>
+{% if products %}
+    <ul>
+         {% for name, price in products.items %}
+            <li>{{ name | upper }} - Price: ${{ price }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No products available.</p>
+{% endif %}
+
+<a href="/add-student">Add student</a>
+
+
+
 
 {% endblock body %} 

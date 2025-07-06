@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Age </th>
+        </tr>
+        {% for p in students %}
+        <tr>
+            <td>{{p.name}}</td>
+            <td>{{p.email}}</td>
+            <td> {{p.age}} </td>
+                
+        </tr>
+            {% endfor %}
+
+    </table>
+    <br>
+<a href="/"><button>Back to home</button></a>
+<a href="/add-student"><button>Add student</button></a>
+</body>
+</html>
