@@ -3,6 +3,9 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404
+
+
 
 from myapp.form import StudentForm
 from myapp.models import Student
@@ -47,11 +50,32 @@ def create_student(request):
         form = StudentForm(request.POST)  # Bind form data
         if form.is_valid():
             form.save()  # Save student data to the database
-            return redirect('success')  # Redirect to student list page
+            return redirect('add_student')
     else:
         form = StudentForm()
+    students = Student.objects.all()
+    return render(request, 'form.html', {'form': form,'students': students})
 
-    return render(request, 'form.html', {'form': form})
+
 def success(request):
     students = Student.objects.all()
     return render(request, 'success.html', {'students': students})
+
+def update_student(request, id):
+    student = get_object_or_404(Student, id=id)
+    form = StudentForm(instance=student)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('add_student')
+
+    return render(request, 'form.html', {'form': form, 'students': Student.objects.all()})
+
+
+def delete_student(request, id):
+    student = get_object_or_404(Student, id=id)
+    student.delete()
+    return redirect('add_student')
+

@@ -21,4 +21,30 @@
     </div>
 
     <button type="submit">Submit</button>
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Age </th>
+            <th>Action</th>
+        </tr>
+        {% for p in students %}
+        <tr>
+            <td>{{p.name}}</td>
+            <td>{{p.email}}</td>
+            <td> {{p.age}} </td>
+            <td>
+                <td>
+    <a href="{% url 'update_student' p.id %}"><button type="button">Update</button></a>
+    <a href="{% url 'delete_student' p.id %}"><button type="button">Delete</button></a>
+</td>
+
+            </td>
+                
+        </tr>
+            {% endfor %}
+
+    </table>
+    <br>
+<a href="/"><button>Back to home</button></a>
 </form>
